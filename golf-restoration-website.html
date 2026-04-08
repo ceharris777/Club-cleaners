@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClubCraft Restoration | Premium Golf Club Restoration</title>
+<meta name="description" content="Professional golf club restoration services. Club cleaning, groove sharpening, rust removal, and buffing. Pickup & delivery available.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0c;
+    --cream: #f5f0e8;
+    --green: #2d5a27;
+    --green-light: #3d7a35;
+    --green-pale: #e8f0e6;
+    --gold: #b8963e;
+    --gold-light: #d4af6a;
+    --warm-gray: #8a8578;
+    --white: #ffffff;
+    --border: rgba(45,90,39,0.18);
+    --shadow: 0 8px 40px rgba(14,14,12,0.12);
+    --shadow-lg: 0 24px 80px rgba(14,14,12,0.2);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--ink);
+    color: var(--cream);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 0 5vw;
+    height: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(14,14,12,0.85);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(184,150,62,0.15);
+    transition: background 0.3s;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: 0.03em;
+    cursor: pointer;
+  }
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    color: rgba(245,240,232,0.75);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--green);
+    color: var(--cream) !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 2px;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--green-light) !important; color: var(--white) !important; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--cream);
+    transition: all 0.3s;
+  }
+
+  /* ─── PAGES ─── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 0 5vw;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 70% at 70% 50%, rgba(45,90,39,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(184,150,62,0.1) 0%, transparent 60%),
+      linear-gradient(160deg, #0e0e0c 0%, #141a12 50%, #0e0e0c 100%);
+  }
+
+  .hero-grid-overlay {
+    position: absolute; inset: 0;
+    background-image: 
+      linear-gradient(rgba(45,90,39,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(45,90,39,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 680px;
+    animation: fadeUp 1s ease both;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(184,150,62,0.35);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 2rem;
+    background: rgba(184,150,62,0.06);
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 8px var(--gold);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.7);
+    margin-bottom: 2.5rem;
+    max-width: 520px;
+    font-weight: 300;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 2.2rem;
+    background: var(--green);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
+  .btn-primary:hover { background: var(--green-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(45,90,39,0.4); }
+  .btn-primary:hover::after { transform: translateX(0); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 2rem;
+    background: transparent;
+    color: var(--cream);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid rgba(245,240,232,0.25);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+  }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-visual {
+    position: absolute;
+    right: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 48%;
+    height: 80vh;
+    overflow: hidden;
+    border-radius: 4px 0 0 4px;
+    animation: fadeIn 1.2s ease 0.3s both;
+  }
+
+  .hero-image-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #1a2e18 0%, #0e1a0c 50%, #1a2e18 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-image-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(circle at 30% 40%, rgba(184,150,62,0.15) 0%, transparent 60%),
+      radial-gradient(circle at 80% 70%, rgba(45,90,39,0.3) 0%, transparent 50%);
+  }
+
+  .golf-illustration {
+    position: relative; z-index: 1;
+    text-align: center;
+  }
+
+  .golf-club-svg {
+    width: 220px;
+    filter: drop-shadow(0 20px 60px rgba(184,150,62,0.3));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-16px); }
+  }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 80px; left: 5vw;
+    display: flex; gap: 3rem;
+    z-index: 2;
+    animation: fadeUp 1s ease 0.5s both;
+  }
+
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    margin-top: 0.3rem;
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 7rem 5vw; }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
+
+  .section-sub {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.65);
+    font-weight: 300;
+    max-width: 540px;
+  }
+
+  /* ─── BEFORE/AFTER ─── */
+  .ba-section {
+    background: linear-gradient(180deg, var(--ink) 0%, #0d1a0b 50%, var(--ink) 100%);
+  }
+
+  .ba-header { text-align: center; margin-bottom: 4rem; }
+  .ba-header .section-sub { margin: 0 auto; }
+
+  .ba-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(184,150,62,0.2);
+    cursor: col-resize;
+    user-select: none;
+  }
+
+  .ba-before, .ba-after {
+    height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ba-before {
+    background: linear-gradient(135deg, #1a1210 0%, #2a1a12 100%);
+    color: rgba(245,240,232,0.5);
+  }
+
+  .ba-after {
+    background: linear-gradient(135deg, #0d1a0b 0%, #1a2e18 100%);
+    color: rgba(245,240,232,0.5);
+  }
+
+  .ba-label {
+    position: absolute;
+    bottom: 1.5rem;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .ba-before .ba-label { left: 1.5rem; background: rgba(139,90,60,0.3); color: #d4a07a; border: 1px solid rgba(139,90,60,0.4); }
+  .ba-after .ba-label { right: 1.5rem; background: rgba(45,90,39,0.3); color: var(--green-light); border: 1px solid rgba(45,90,39,0.4); }
+
+  .ba-slider-wrapper {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ba-divider {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: var(--gold);
+    transform: translateX(-50%);
+    z-index: 10;
+    transition: left 0.05s;
+  }
+
+  .ba-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(184,150,62,0.5);
+    z-index: 11;
+    font-size: 1.1rem;
+    color: var(--ink);
+    transition: left 0.05s;
+    cursor: col-resize;
+  }
+
+  .ba-after-cover {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    left: 50%;
+    overflow: hidden;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ba-after-inner {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0d1a0b 0%, #1a2e18 100%);
+  }
+
+  /* Club illustrations */
+  .club-before-vis, .club-after-vis {
+    width: 160px;
+    height: 320px;
+    position: relative;
+  }
+
+  /* ─── ABOUT ─── */
+  .about-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .about-feature {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .about-feature:hover {
+    border-color: rgba(45,90,39,0.4);
+    background: rgba(45,90,39,0.05);
+  }
+
+  .feature-icon {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: rgba(45,90,39,0.15);
+    border: 1px solid rgba(45,90,39,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .feature-text h4 {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+  }
+
+  .feature-text p {
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.5;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-card {
+    background: linear-gradient(145deg, #141a12, #0e1a0c);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-card::before {
+    content: '';
+    position: absolute;
+    top: -40%; left: -40%;
+    width: 180%; height: 180%;
+    background: radial-gradient(circle, rgba(45,90,39,0.12) 0%, transparent 60%);
+  }
+
+  .about-card-icon {
+    font-size: 5rem;
+    display: block;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 8px 24px rgba(184,150,62,0.2));
+  }
+
+  .about-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .about-card p {
+    color: rgba(245,240,232,0.6);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .float-badge {
+    position: absolute;
+    bottom: -1rem; right: -1rem;
+    background: var(--green);
+    color: var(--white);
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    box-shadow: var(--shadow);
+  }
+
+  /* ─── SERVICES PREVIEW ─── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 4rem;
+  }
+
+  .service-card {
+    background: #111310;
+    padding: 2.2rem 1.8rem;
+    position: relative;
+    transition: background 0.3s;
+    cursor: default;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--green);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover { background: #151a13; }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+    color: var(--cream);
+  }
+
+  .service-card p {
+    font-size: 0.83rem;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.6;
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials-section {
+    background: #0c1209;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .testimonial-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .testimonial-card:hover {
+    border-color: rgba(184,150,62,0.3);
+    transform: translateY(-4px);
+  }
+
+  .testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    color: rgba(184,150,62,0.12);
+    line-height: 1;
+  }
+
+  .stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 2px; }
+
+  .testimonial-text {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.75);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .author-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+
+  .author-name { font-weight: 600; font-size: 0.9rem; }
+  .author-title { font-size: 0.78rem; color: rgba(245,240,232,0.5); }
+
+  /* ─── HOME CTA BAND ─── */
+  .cta-band {
+    background: linear-gradient(135deg, var(--green) 0%, #1e4019 100%);
+    padding: 5rem 5vw;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-band::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: 
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .cta-band h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .cta-band p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  /* ─── SERVICES PAGE ─── */
+  .services-page { background: var(--ink); }
+
+  .services-page-hero {
+    padding: 11rem 5vw 5rem;
+    background: linear-gradient(160deg, #0e0e0c 0%, #0d1a0b 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .services-page-hero::before {
+    content: '';
+    position: absolute;
+    right: 5vw; top: 50%;
+    transform: translateY(-50%);
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(45,90,39,0.2) 0%, transparent 70%);
+  }
+
+  .services-detail {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 5rem 5vw;
+  }
+
+  .service-detail-card {
+    background: #111310;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .service-detail-card:hover {
+    border-color: rgba(45,90,39,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .service-detail-card .service-num {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+  }
+
+  .service-big-icon {
+    font-size: 3rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .service-detail-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    margin-bottom: 0.8rem;
+    color: var(--cream);
+  }
+
+  .service-detail-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.6);
+    margin-bottom: 1.5rem;
+  }
+
+  .service-benefits {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .service-benefits li {
+    font-size: 0.83rem;
+    color: rgba(245,240,232,0.7);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .service-benefits li::before {
+    content: '✓';
+    color: var(--green-light);
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  /* ─── PRICING ─── */
+  .pricing-section {
+    padding: 5rem 5vw 7rem;
+    background: #0c1209;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 800px;
+    margin: 3rem auto 0;
+  }
+
+  .pricing-card {
+    background: #111310;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2.8rem;
+    position: relative;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .pricing-card.featured {
+    border-color: var(--gold);
+    background: linear-gradient(145deg, #151a13, #111310);
+  }
+
+  .pricing-card.featured::before {
+    content: 'Most Popular';
+    position: absolute;
+    top: -13px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border-radius: 100px;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .price-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    margin-bottom: 2rem;
+  }
+
+  .price-includes {
+    list-style: none;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .price-includes li {
+    font-size: 0.88rem;
+    color: rgba(245,240,232,0.75);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .price-includes li::before {
+    content: '◆';
+    color: var(--green-light);
+    font-size: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  /* ─── CONTACT PAGE ─── */
+  .contact-page { background: var(--ink); }
+
+  .contact-hero {
+    padding: 11rem 5vw 4rem;
+    background: linear-gradient(160deg, #0e0e0c 0%, #0d1a0b 100%);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: 5rem 5vw 7rem;
+    align-items: start;
+  }
+
+  .contact-form-section { }
+
+  .form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-sub {
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.55);
+    margin-bottom: 2rem;
+  }
+
+  .form-group { margin-bottom: 1.2rem; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.6);
+    margin-bottom: 0.4rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.9rem 1rem;
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--green-light);
+    background: rgba(45,90,39,0.05);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 130px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 3rem 2rem;
+    background: rgba(45,90,39,0.1);
+    border: 1px solid rgba(45,90,39,0.3);
+    border-radius: 6px;
+  }
+
+  .form-success.show { display: block; }
+  .form-success .success-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--green-light); }
+  .form-success p { color: rgba(245,240,232,0.6); }
+
+  .contact-info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .calendly-embed {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .calendly-placeholder {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .calendly-placeholder h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .calendly-placeholder p {
+    color: rgba(245,240,232,0.55);
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .info-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.8rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+
+  .info-card:hover { border-color: rgba(45,90,39,0.35); }
+
+  .info-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(45,90,39,0.15);
+    border: 1px solid rgba(45,90,39,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .info-text h4 { font-weight: 600; margin-bottom: 0.25rem; font-size: 0.95rem; }
+  .info-text p { font-size: 0.85rem; color: rgba(245,240,232,0.6); line-height: 1.5; }
+  .info-text a { color: var(--gold-light); text-decoration: none; }
+  .info-text a:hover { text-decoration: underline; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #090b08;
+    border-top: 1px solid var(--border);
+    padding: 3rem 5vw 2rem;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand .nav-logo { font-size: 1.3rem; display: block; margin-bottom: 0.8rem; }
+
+  .footer-brand p {
+    font-size: 0.83rem;
+    color: rgba(245,240,232,0.45);
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+  }
+
+  .social-links { display: flex; gap: 0.8rem; }
+
+  .social-link {
+    width: 36px; height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    color: rgba(245,240,232,0.5);
+    text-decoration: none;
+  }
+
+  .social-link:hover { border-color: var(--gold); color: var(--gold); }
+
+  .footer-col h5 {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col a {
+    font-size: 0.84rem;
+    color: rgba(245,240,232,0.5);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--gold-light); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    color: rgba(245,240,232,0.3);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-bottom: 2rem;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .hero-visual { width: 40%; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-section { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 4vw; }
+    .nav-links { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(14,14,12,0.97); flex-direction: column; padding: 2rem; gap: 1.2rem; border-bottom: 1px solid var(--border); }
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+    .hero-visual { display: none; }
+    .hero h1 { font-size: 2.8rem; }
+    section { padding: 4rem 4vw; }
+    .services-grid { grid-template-columns: 1fr; }
+    .services-detail { grid-template-columns: 1fr; padding: 3rem 4vw; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; padding: 3rem 4vw; }
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 0.8rem; text-align: center; }
+    .ba-before, .ba-after { height: 300px; }
+    .hero-stats { gap: 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+  <div class="nav-logo" onclick="showPage('home')">Club<span>Craft</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="showPage('home'); closeMenu()">Home</a></li>
+    <li><a onclick="showPage('services'); closeMenu()">Services</a></li>
+    <li><a onclick="showPage('contact'); closeMenu()" class="nav-cta">Book Now</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════
+     PAGE 1: HOME
+═══════════════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-overlay"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">Pickup & Delivery Available</div>
+      <h1>Restore Your Clubs to<br><em>Like-New Performance</em></h1>
+      <p>Professional golf club restoration that revives spin, control, and appearance. Your game deserves equipment that performs like the day it was forged.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('contact')">Book Now →</button>
+        <button class="btn-secondary" onclick="showPage('services')">View Services</button>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-image-placeholder">
+        <div class="golf-illustration">
+          <svg class="golf-club-svg" viewBox="0 0 200 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Shaft -->
+            <rect x="97" y="30" width="6" height="380" rx="3" fill="url(#shaftGrad)"/>
+            <!-- Grip -->
+            <rect x="93" y="20" width="14" height="80" rx="7" fill="#2d2d2d"/>
+            <rect x="95" y="20" width="10" height="80" rx="5" fill="#3d3d3d"/>
+            <!-- Ferrule -->
+            <rect x="93" y="98" width="14" height="8" rx="2" fill="#b8963e"/>
+            <!-- Hosel -->
+            <path d="M93 390 Q90 420 80 440 L120 440 Q110 420 107 390Z" fill="url(#headGrad)"/>
+            <!-- Club Head -->
+            <rect x="55" y="432" width="90" height="38" rx="6" fill="url(#headGrad)"/>
+            <!-- Face lines (grooves) -->
+            <line x1="65" y1="440" x2="135" y2="440" stroke="rgba(184,150,62,0.6)" stroke-width="1.5"/>
+            <line x1="65" y1="448" x2="135" y2="448" stroke="rgba(184,150,62,0.6)" stroke-width="1.5"/>
+            <line x1="65" y1="456" x2="135" y2="456" stroke="rgba(184,150,62,0.6)" stroke-width="1.5"/>
+            <!-- Shine -->
+            <rect x="60" y="434" width="3" height="30" rx="1.5" fill="rgba(255,255,255,0.15)"/>
+            <defs>
+              <linearGradient id="shaftGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#888"/>
+                <stop offset="50%" stop-color="#ddd"/>
+                <stop offset="100%" stop-color="#999"/>
+              </linearGradient>
+              <linearGradient id="headGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#c0c0c0"/>
+                <stop offset="50%" stop-color="#e8e8e8"/>
+                <stop offset="100%" stop-color="#a0a0a0"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <p style="color: rgba(184,150,62,0.7); font-family: 'Cormorant Garamond', serif; font-style: italic; margin-top: 1rem; font-size: 1.1rem;">Restored to Perfection</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Clubs Restored</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Satisfaction Rate</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">48hr</div>
+        <div class="stat-label">Turnaround</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER -->
+  <section class="ba-section">
+    <div class="ba-header reveal">
+      <div class="section-label">Visible Results</div>
+      <h2 class="section-title">The ClubCraft Difference</h2>
+      <p class="section-sub">Drag the slider to see the dramatic transformation our restoration process delivers.</p>
+    </div>
+
+    <div class="ba-container reveal" id="baContainer">
+      <div class="ba-slider-wrapper">
+        <!-- BEFORE side -->
+        <div class="ba-before">
+          <svg width="140" height="280" viewBox="0 0 140 280">
+            <!-- Rusty/dirty club head -->
+            <rect x="20" y="180" width="100" height="44" rx="5" fill="#5a3d1e" opacity="0.9"/>
+            <!-- rust spots -->
+            <circle cx="40" cy="198" r="8" fill="#8b5e3c" opacity="0.6"/>
+            <circle cx="70" cy="210" r="6" fill="#7a4e2a" opacity="0.7"/>
+            <circle cx="100" cy="195" r="9" fill="#6b4520" opacity="0.5"/>
+            <circle cx="55" cy="215" r="4" fill="#9b6e4c" opacity="0.8"/>
+            <!-- worn grooves -->
+            <line x1="30" y1="190" x2="110" y2="190" stroke="#3a2010" stroke-width="1.5" opacity="0.4"/>
+            <line x1="30" y1="200" x2="110" y2="200" stroke="#3a2010" stroke-width="1.5" opacity="0.3"/>
+            <line x1="30" y1="210" x2="110" y2="210" stroke="#3a2010" stroke-width="1.5" opacity="0.2"/>
+            <!-- dirty shaft -->
+            <rect x="66" y="20" width="8" height="164" rx="4" fill="#888" opacity="0.5"/>
+            <!-- grime -->
+            <rect x="64" y="100" width="12" height="40" rx="2" fill="#5a4a30" opacity="0.4"/>
+            <text y="260" x="70" text-anchor="middle" fill="rgba(245,240,232,0.35)" font-family="'Cormorant Garamond', serif" font-size="14" font-style="italic">Before</text>
+          </svg>
+          <div class="ba-label">Before</div>
+        </div>
+
+        <!-- AFTER side overlaid -->
+        <div class="ba-after-cover" id="baAfterCover">
+          <div class="ba-after-inner">
+            <svg width="140" height="280" viewBox="0 0 140 280">
+              <!-- Polished club head -->
+              <defs>
+                <linearGradient id="polishGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#d0d0d0"/>
+                  <stop offset="40%" stop-color="#f0f0f0"/>
+                  <stop offset="100%" stop-color="#b8b8b8"/>
+                </linearGradient>
+              </defs>
+              <rect x="20" y="180" width="100" height="44" rx="5" fill="url(#polishGrad)"/>
+              <!-- highlight -->
+              <rect x="24" y="183" width="4" height="36" rx="2" fill="rgba(255,255,255,0.6)"/>
+              <!-- sharp grooves -->
+              <line x1="30" y1="190" x2="110" y2="190" stroke="rgba(60,60,60,0.6)" stroke-width="2"/>
+              <line x1="30" y1="200" x2="110" y2="200" stroke="rgba(60,60,60,0.6)" stroke-width="2"/>
+              <line x1="30" y1="210" x2="110" y2="210" stroke="rgba(60,60,60,0.6)" stroke-width="2"/>
+              <!-- shine effect -->
+              <ellipse cx="80" cy="195" rx="25" ry="12" fill="rgba(255,255,255,0.12)"/>
+              <!-- clean shaft -->
+              <rect x="66" y="20" width="8" height="164" rx="4" fill="url(#shaftGrad2)"/>
+              <defs>
+                <linearGradient id="shaftGrad2" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#999"/>
+                  <stop offset="50%" stop-color="#eee"/>
+                  <stop offset="100%" stop-color="#aaa"/>
+                </linearGradient>
+              </defs>
+              <text y="260" x="70" text-anchor="middle" fill="rgba(184,150,62,0.8)" font-family="'Cormorant Garamond', serif" font-size="14" font-style="italic">After</text>
+            </svg>
+            <div class="ba-label" style="right:1.5rem">After</div>
+          </div>
+        </div>
+
+        <div class="ba-divider" id="baDivider"></div>
+        <div class="ba-handle" id="baHandle">⇔</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section>
+    <div class="about-section reveal">
+      <div>
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-title">Crafted for Golfers,<br>by Golfers</h2>
+        <div class="divider"></div>
+        <p class="section-sub">ClubCraft is a dedicated golf club restoration service committed to bringing your equipment back to peak performance. We combine precision technique with genuine passion for the game.</p>
+
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-text">
+              <h4>Performance-First Restoration</h4>
+              <p>We go beyond aesthetics — our process restores the functional integrity of every club.</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="feature-icon">🚗</div>
+            <div class="feature-text">
+              <h4>Free Pickup & Delivery</h4>
+              <p>Door-to-door convenience. We come to you, handle everything, and return your clubs like new.</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="feature-icon">🏆</div>
+            <div class="feature-text">
+              <h4>Proven Track Record</h4>
+              <p>Hundreds of satisfied golfers trust us with their most valued equipment.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-visual">
+        <div class="about-card">
+          <span class="about-card-icon">⛳</span>
+          <h3>48-Hour Turnaround</h3>
+          <p>Most full restorations completed within 48 hours. Because your round shouldn't wait.</p>
+          <div class="float-badge">📦 Pickup & Delivery</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW -->
+  <section style="padding-top: 0;">
+    <div class="reveal">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Our Services</h2>
+    </div>
+    <div class="services-grid reveal" style="margin-top:2rem">
+      <div class="service-card">
+        <span class="service-icon">🧹</span>
+        <h3>Club Cleaning</h3>
+        <p>Deep removal of dirt, grass, and debris from faces, grooves, and hosels.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🔧</span>
+        <h3>Groove Sharpening</h3>
+        <p>Restore factory-edge grooves to maximize backspin and precision shot control.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">⚗️</span>
+        <h3>Rust Removal</h3>
+        <p>Eliminate oxidation and corrosion, preserving durability and original finish.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">✨</span>
+        <h3>Buffing & Polishing</h3>
+        <p>Mirror-quality finish that makes your clubs look — and perform — like new.</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top: 3rem;" class="reveal">
+      <button class="btn-primary" onclick="showPage('services')">See Full Services & Pricing →</button>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div style="text-align:center;" class="reveal">
+      <div class="section-label">Customer Stories</div>
+      <h2 class="section-title">What Golfers Are Saying</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"My irons look better than when I first bought them. The groove sharpening made a noticeable difference on my approach shots — more spin, better control. Absolutely worth every penny."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MR</div>
+          <div>
+            <div class="author-name">Michael R.</div>
+            <div class="author-title">12 Handicap, Shenandoah Valley</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The pickup and delivery was incredibly convenient. Dropped off my wedges Monday morning and had them back Tuesday looking pristine. The rust removal was remarkable — like they traveled back in time."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SL</div>
+          <div>
+            <div class="author-name">Sandra L.</div>
+            <div class="author-title">Club Member, Augusta Area</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"I was skeptical that cleaning could really improve performance, but after ClubCraft worked on my set, I'm a believer. The full restoration package is a steal at $45. My whole bag thanks them."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">TP</div>
+          <div>
+            <div class="author-name">Thomas P.</div>
+            <div class="author-title">Weekend Golfer, 7 Handicap</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <div class="cta-band reveal">
+    <h2>Ready to Play Your Best Round?</h2>
+    <p>Book your restoration today. Pickup and delivery available — no hassle, just results.</p>
+    <button class="btn-primary" onclick="showPage('contact')" style="font-size:1rem; padding: 1.1rem 2.8rem;">Book Now →</button>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo">Club<span style="color:var(--gold)">Craft</span></div>
+        <p>Professional golf club restoration services. Bringing performance and beauty back to your game, one club at a time.</p>
+        <div class="social-links">
+          <a class="social-link" href="#" title="Instagram">📸</a>
+          <a class="social-link" href="#" title="Facebook">👥</a>
+          <a class="social-link" href="#" title="Twitter/X">🐦</a>
+          <a class="social-link" href="#" title="YouTube">▶️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Pages</h5>
+        <ul>
+          <li><a onclick="showPage('home')">Home</a></li>
+          <li><a onclick="showPage('services')">Services</a></li>
+          <li><a onclick="showPage('contact')">Book Now</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a>Club Cleaning</a></li>
+          <li><a>Groove Sharpening</a></li>
+          <li><a>Rust Removal</a></li>
+          <li><a>Buffing & Polishing</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ClubCraft Restoration. All rights reserved.</span>
+      <span>Stuarts Draft, Virginia</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     PAGE 2: SERVICES
+═══════════════════════════════════════════════════ -->
+<div id="page-services" class="page">
+  <div class="services-page">
+
+    <div class="services-page-hero">
+      <div class="section-label">What We Offer</div>
+      <h1 class="section-title" style="max-width:600px">Expert Services for Every Club in Your Bag</h1>
+      <p class="section-sub">From a basic detail to a complete restoration, we have a solution that fits your clubs and your budget.</p>
+    </div>
+
+    <div class="services-detail">
+      <div class="service-detail-card reveal">
+        <span class="service-num">01</span>
+        <span class="service-big-icon">🧹</span>
+        <h3>Club Cleaning</h3>
+        <p>Our comprehensive cleaning process removes embedded dirt, grass, and grime from every surface — faces, hosels, ferrules, and grips — restoring both appearance and feel.</p>
+        <ul class="service-benefits">
+          <li>Full face and groove cleaning</li>
+          <li>Hosel and shaft wipe-down</li>
+          <li>Restores original shine</li>
+          <li>Improves contact consistency</li>
+        </ul>
+      </div>
+
+      <div class="service-detail-card reveal">
+        <span class="service-num">02</span>
+        <span class="service-big-icon">🔧</span>
+        <h3>Groove Sharpening</h3>
+        <p>Worn grooves are the #1 reason golfers lose spin and shot control around the greens. Our sharpening process restores factory-level groove depth for maximum ball interaction.</p>
+        <ul class="service-benefits">
+          <li>Restores factory groove geometry</li>
+          <li>Maximizes backspin on approach shots</li>
+          <li>Better control in wet conditions</li>
+          <li>Legal within USGA specifications</li>
+        </ul>
+      </div>
+
+      <div class="service-detail-card reveal">
+        <span class="service-num">03</span>
+        <span class="service-big-icon">⚗️</span>
+        <h3>Rust Removal</h3>
+        <p>Rust doesn't just look bad — it degrades performance and accelerates further deterioration. Our treatment safely removes oxidation without damaging the underlying steel or finish.</p>
+        <ul class="service-benefits">
+          <li>Safe chemical & mechanical removal</li>
+          <li>Prevents further corrosion spread</li>
+          <li>Restores structural integrity</li>
+          <li>Pre-treatment before polishing</li>
+        </ul>
+      </div>
+
+      <div class="service-detail-card reveal">
+        <span class="service-num">04</span>
+        <span class="service-big-icon">✨</span>
+        <h3>Buffing & Polishing</h3>
+        <p>The finishing touch. Our multi-stage polishing process produces a mirror-quality finish that makes your clubs look better than they did leaving the factory.</p>
+        <ul class="service-benefits">
+          <li>Multi-stage compound polishing</li>
+          <li>Satin or mirror finish options</li>
+          <li>UV-resistant protective coat</li>
+          <li>Long-lasting luster</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PRICING -->
+    <section class="pricing-section">
+      <div style="text-align:center" class="reveal">
+        <div class="section-label">Simple Pricing</div>
+        <h2 class="section-title">Clear Value, No Surprises</h2>
+        <p class="section-sub" style="margin: 0 auto">Per-club pricing. The more clubs you bring, the more you save. Pickup and delivery always included.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card reveal">
+          <div class="price-amount">$25</div>
+          <div class="price-name">Club Detailing</div>
+          <ul class="price-includes">
+            <li>Full Club Cleaning</li>
+            <li>Light Polishing</li>
+            <li>Basic Restoration</li>
+            <li>Pickup & Delivery</li>
+          </ul>
+          <button class="btn-primary" onclick="showPage('contact')" style="width:100%; justify-content:center">Book Detailing →</button>
+        </div>
+
+        <div class="pricing-card featured reveal">
+          <div class="price-amount">$45</div>
+          <div class="price-name">Club Restoration</div>
+          <ul class="price-includes">
+            <li>Deep Cleaning</li>
+            <li>Groove Sharpening</li>
+            <li>Rust Removal</li>
+            <li>Full Buffing & Polish</li>
+            <li>Pickup & Delivery</li>
+          </ul>
+          <button class="btn-primary" onclick="showPage('contact')" style="width:100%; justify-content:center">Book Restoration →</button>
+        </div>
+      </div>
+
+      <p style="text-align:center; color:rgba(245,240,232,0.4); font-size:0.8rem; margin-top:1.5rem;">* Pricing is per club. Bundle discounts available for full sets. Contact us for a custom quote.</p>
+    </section>
+
+    <!-- SERVICES CTA -->
+    <div class="cta-band">
+      <h2>Your Clubs Deserve the Best</h2>
+      <p>Book today and experience the ClubCraft difference. Results guaranteed.</p>
+      <button class="btn-primary" onclick="showPage('contact')" style="font-size:1rem; padding: 1.1rem 2.8rem;">Schedule Pickup →</button>
+    </div>
+
+    <footer>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo">Club<span style="color:var(--gold)">Craft</span></div>
+          <p>Professional golf club restoration services. Bringing performance and beauty back to your game, one club at a time.</p>
+          <div class="social-links">
+            <a class="social-link" href="#" title="Instagram">📸</a>
+            <a class="social-link" href="#" title="Facebook">👥</a>
+            <a class="social-link" href="#" title="Twitter/X">🐦</a>
+            <a class="social-link" href="#" title="YouTube">▶️</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Pages</h5>
+          <ul>
+            <li><a onclick="showPage('home')">Home</a></li>
+            <li><a onclick="showPage('services')">Services</a></li>
+            <li><a onclick="showPage('contact')">Book Now</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a>Club Cleaning</a></li>
+            <li><a>Groove Sharpening</a></li>
+            <li><a>Rust Removal</a></li>
+            <li><a>Buffing & Polishing</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 ClubCraft Restoration. All rights reserved.</span>
+        <span>Stuarts Draft, Virginia</span>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     PAGE 3: CONTACT / BOOKING
+═══════════════════════════════════════════════════ -->
+<div id="page-contact" class="page">
+  <div class="contact-page">
+
+    <div class="contact-hero">
+      <div class="section-label">Get Started</div>
+      <h1 class="section-title" style="max-width:600px">Book Your Restoration Today</h1>
+      <p class="section-sub">Use the scheduler below to pick your preferred time, or send us a message. We'll confirm your pickup within hours.</p>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- FORM SIDE -->
+      <div class="contact-form-section reveal">
+        <h2 class="form-title">Send a Message</h2>
+        <p class="form-sub">Questions? Special requests? We're happy to help.</p>
+
+        <div id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" id="fname" placeholder="John" />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" id="lname" placeholder="Smith" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="femail" placeholder="john@example.com" />
+          </div>
+          <div class="form-group">
+            <label>Phone Number (Optional)</label>
+            <input type="tel" id="fphone" placeholder="(540) 555-0100" />
+          </div>
+          <div class="form-group">
+            <label>Service Needed</label>
+            <select id="fservice">
+              <option value="">Select a service...</option>
+              <option value="detailing">Club Detailing – $25/club</option>
+              <option value="restoration">Full Restoration – $45/club</option>
+              <option value="custom">Custom Quote (Full Set)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea id="fmessage" placeholder="Tell us about your clubs — how many, the condition, any specific concerns..."></textarea>
+          </div>
+          <button class="btn-primary" style="width:100%; justify-content:center; padding:1.1rem;" onclick="submitForm()">Send Message →</button>
+        </div>
+
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">✅</div>
+          <h3>Message Sent!</h3>
+          <p>Thank you for reaching out. We'll be in touch within a few hours to confirm your pickup time.</p>
+        </div>
+      </div>
+
+      <!-- INFO SIDE -->
+      <div class="contact-info-section reveal">
+
+        <!-- Calendly Embed Placeholder -->
+        <div class="calendly-embed">
+          <div class="calendly-placeholder">
+            <div style="font-size:2.5rem; margin-bottom:0.8rem;">📅</div>
+            <h3>Schedule Your Pickup</h3>
+            <p>Use our online booking tool to select a convenient pickup time. We operate 7 days a week.</p>
+            <button class="btn-primary" style="margin:0 auto" onclick="alert('Calendly integration goes here. Replace this button with your Calendly embed code.')">Open Scheduler →</button>
+            <p style="font-size:0.75rem; margin-top:1rem; color:rgba(245,240,232,0.35)">Powered by Calendly — embed your scheduling link here</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">📧</div>
+          <div class="info-text">
+            <h4>Email Us</h4>
+            <p><a href="mailto:hello@clubcraftrestoration.com">hello@clubcraftrestoration.com</a><br>We typically respond within 2–4 hours.</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">🚗</div>
+          <div class="info-text">
+            <h4>Pickup & Delivery</h4>
+            <p>We serve the greater Shenandoah Valley area. Pickup and delivery is included at no extra charge with every service.</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">⏱️</div>
+          <div class="info-text">
+            <h4>Turnaround Time</h4>
+            <p>Most restorations are completed within 48 hours of pickup. Full sets may take 72 hours. Rush service available upon request.</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">📞</div>
+          <div class="info-text">
+            <h4>Operating Hours</h4>
+            <p>Monday – Sunday: 8:00 AM – 7:00 PM<br>We work around your schedule.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo">Club<span style="color:var(--gold)">Craft</span></div>
+          <p>Professional golf club restoration services. Bringing performance and beauty back to your game, one club at a time.</p>
+          <div class="social-links">
+            <a class="social-link" href="#" title="Instagram">📸</a>
+            <a class="social-link" href="#" title="Facebook">👥</a>
+            <a class="social-link" href="#" title="Twitter/X">🐦</a>
+            <a class="social-link" href="#" title="YouTube">▶️</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Pages</h5>
+          <ul>
+            <li><a onclick="showPage('home')">Home</a></li>
+            <li><a onclick="showPage('services')">Services</a></li>
+            <li><a onclick="showPage('contact')">Book Now</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:hello@clubcraftrestoration.com">hello@clubcraftrestoration.com</a></li>
+            <li><a>Stuarts Draft, Virginia</a></li>
+            <li><a>Mon–Sun: 8AM–7PM</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 ClubCraft Restoration. All rights reserved.</span>
+        <span>Stuarts Draft, Virginia</span>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- ─── SCRIPTS ─── -->
+<script>
+  // ── Page Navigation
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    initReveal();
+    if (name === 'home') initBA();
+  }
+
+  // ── Mobile Menu
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('navLinks').classList.remove('open');
+  }
+
+  // ── Scroll Reveal
+  function initReveal() {
+    const els = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          e.target.style.transitionDelay = (i * 0.06) + 's';
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+  }
+
+  // ── Before/After Slider
+  function initBA() {
+    const container = document.getElementById('baContainer');
+    const cover = document.getElementById('baAfterCover');
+    const divider = document.getElementById('baDivider');
+    const handle = document.getElementById('baHandle');
+    if (!container) return;
+
+    let isDragging = false;
+
+    function setPos(pct) {
+      pct = Math.max(5, Math.min(95, pct));
+      cover.style.left = pct + '%';
+      divider.style.left = pct + '%';
+      handle.style.left = pct + '%';
+    }
+
+    setPos(50);
+
+    function getX(e) {
+      return e.touches ? e.touches[0].clientX : e.clientX;
+    }
+
+    handle.addEventListener('mousedown', () => isDragging = true);
+    handle.addEventListener('touchstart', () => isDragging = true, { passive: true });
+
+    document.addEventListener('mouseup', () => isDragging = false);
+    document.addEventListener('touchend', () => isDragging = false);
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const rect = container.getBoundingClientRect();
+      const pct = ((getX(e) - rect.left) / rect.width) * 100;
+      setPos(pct);
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const rect = container.getBoundingClientRect();
+      const pct = ((getX(e) - rect.left) / rect.width) * 100;
+      setPos(pct);
+    }, { passive: true });
+
+    container.addEventListener('click', (e) => {
+      if (!isDragging) {
+        const rect = container.getBoundingClientRect();
+        const pct = ((e.clientX - rect.left) / rect.width) * 100;
+        setPos(pct);
+      }
+    });
+  }
+
+  // ── Form Submit
+  function submitForm() {
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    if (!name || !email) {
+      alert('Please fill in your name and email address.');
+      return;
+    }
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').classList.add('show');
+  }
+
+  // ── Init
+  document.addEventListener('DOMContentLoaded', () => {
+    initReveal();
+    initBA();
+
+    // Trigger early reveals on the visible page
+    setTimeout(() => {
+      document.querySelectorAll('.page.active .reveal').forEach(el => {
+        el.classList.add('visible');
+      });
+    }, 400);
+  });
+</script>
+</body>
+</html>
