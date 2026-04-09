@@ -1187,7 +1187,16 @@
   <ul class="nav-links" id="navLinks">
     <li><a onclick="showPage('home'); closeMenu()">Home</a></li>
     <li><a onclick="showPage('services'); closeMenu()">Services</a></li>
-    <li><a onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSdSQIU_8LZ0lUMQJzrG-J7kJTAAwFS9b-wiDIDikZ8fMB7z6Q/viewform?usp=publish-editor','_blank'); closeMenu()" class="nav-cta">Book Now</a></li>
+    <li>
+      <a 
+        href="https://docs.google.com/forms/d/e/1FAIpQLSdSQIU_8LZ0lUMQJzrG-J7kJTAAwFS9b-wiDIDikZ8fMB7z6Q/viewform" 
+        target="_blank" 
+        class="nav-cta"
+        onclick="closeMenu()"
+      >
+        Book Now
+      </a>
+    </li>
   </ul>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
