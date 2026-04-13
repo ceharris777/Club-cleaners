@@ -356,26 +356,57 @@
     user-select: none;
   }
 
-  .ba-before, .ba-after {
-    height: 480px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    font-style: italic;
+  /* ─── BEFORE/AFTER SLIDER (full-width overlay approach) ─── */
+  .ba-slider-wrapper {
     position: relative;
+    width: 100%;
+    height: 480px;
+    overflow: hidden;
+    display: block;
+  }
+
+  /* BEFORE — full width base layer */
+  .ba-before {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
   }
-
-  .ba-before {
-    background: linear-gradient(135deg, #1a1210 0%, #2a1a12 100%);
-    color: rgba(245,240,232,0.5);
+  .ba-before img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
   }
 
-  .ba-after {
-    background: linear-gradient(135deg, #0d1a0b 0%, #1a2e18 100%);
-    color: rgba(245,240,232,0.5);
+  /* AFTER — full width, clipped from the right by JS */
+  .ba-after-cover {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;   /* JS will update this */
+    right: 0;
+    overflow: hidden;
+    z-index: 5;
+  }
+  .ba-after-inner {
+    position: absolute;
+    top: 0; bottom: 0;
+    /* anchor image to the LEFT edge of the full container, not the cover */
+    right: 0;
+    /* width tracks: 100vw-equivalent inside the cover = full container width */
+  }
+  .ba-after-inner img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
   }
 
   .ba-label {
@@ -388,26 +419,19 @@
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    z-index: 8;
   }
-
   .ba-before .ba-label { left: 1.5rem; background: rgba(139,90,60,0.3); color: #d4a07a; border: 1px solid rgba(139,90,60,0.4); }
-  .ba-after .ba-label { right: 1.5rem; background: rgba(45,90,39,0.3); color: var(--green-light); border: 1px solid rgba(45,90,39,0.4); }
-
-  .ba-slider-wrapper {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
+  .ba-after-cover .ba-label { right: 1.5rem; background: rgba(45,90,39,0.3); color: var(--green-light); border: 1px solid rgba(45,90,39,0.4); }
 
   .ba-divider {
     position: absolute;
     top: 0; bottom: 0;
     left: 50%;
-    width: 2px;
+    width: 3px;
     background: var(--gold);
     transform: translateX(-50%);
     z-index: 10;
-    transition: left 0.05s;
   }
 
   .ba-handle {
@@ -415,46 +439,19 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 48px; height: 48px;
+    width: 52px; height: 52px;
     border-radius: 50%;
     background: var(--gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 20px rgba(184,150,62,0.5);
+    box-shadow: 0 4px 24px rgba(184,150,62,0.6);
     z-index: 11;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: var(--ink);
-    transition: left 0.05s;
     cursor: col-resize;
-  }
-
-  .ba-after-cover {
-    position: absolute;
-    top: 0; right: 0; bottom: 0;
-    left: 50%;
-    overflow: hidden;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .ba-after-inner {
-    position: absolute;
-    top: 0; right: 0; bottom: 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #0d1a0b 0%, #1a2e18 100%);
-  }
-
-  /* Club illustrations */
-  .club-before-vis, .club-after-vis {
-    width: 160px;
-    height: 320px;
-    position: relative;
+    font-weight: 700;
+    letter-spacing: -1px;
   }
 
   /* ─── ABOUT ─── */
@@ -1173,7 +1170,7 @@
     .contact-grid { grid-template-columns: 1fr; padding: 3rem 4vw; }
     .footer-top { grid-template-columns: 1fr; gap: 2rem; }
     .footer-bottom { flex-direction: column; gap: 0.8rem; text-align: center; }
-    .ba-before, .ba-after { height: 300px; }
+    .ba-slider-wrapper { height: 300px; }
     .hero-stats { gap: 1.5rem; }
     .form-row { grid-template-columns: 1fr; }
   }
@@ -1244,23 +1241,27 @@
     </div>
 
     <div class="ba-container reveal" id="baContainer">
-      <div class="ba-slider-wrapper">
-        <!-- BEFORE side -->
+      <div class="ba-slider-wrapper" id="baWrapper">
+
+        <!-- BEFORE — full-width base -->
         <div class="ba-before">
-          <img src="before_club.png" alt="Club before restoration" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block; position:absolute; inset:0;"/>
+          <img src="before_club.png" alt="Club before restoration"/>
           <div class="ba-label">Before</div>
         </div>
 
-        <!-- AFTER side overlaid -->
+        <!-- AFTER — clipped overlay, reveals from right as handle moves left -->
         <div class="ba-after-cover" id="baAfterCover">
-          <div class="ba-after-inner">
-            <img src="after_club.png" alt="Club after restoration" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block; position:absolute; inset:0;"/>
-            <div class="ba-label" style="right:1.5rem; left:auto;">After</div>
+          <div class="ba-after-inner" id="baAfterInner">
+            <img src="after_club.png" alt="Club after restoration" id="baAfterImg"/>
+            <div class="ba-label">After</div>
           </div>
         </div>
 
+        <!-- Divider line -->
         <div class="ba-divider" id="baDivider"></div>
+        <!-- Drag handle -->
         <div class="ba-handle" id="baHandle">⇔</div>
+
       </div>
     </div>
   </section>
@@ -1303,8 +1304,7 @@
         <div class="about-card">
           <span class="about-card-icon">⛳</span>
           <h3>48–72 Hour Turnaround</h3>
-          <p>Most restorations completed within 48–72 hours. Because your round shouldn't wait.</p>
-          <div class="float-badge">📦 Pickup & Delivery</div>
+          <p>Most restorations completed within 48–72 hours with pickup and delivery. Because your round shouldn't wait.</p>
         </div>
       </div>
     </div>
@@ -1364,7 +1364,7 @@
   <footer>
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="nav-logo">Bogie<span style="color:var(--gold)">Buffers</span></div>
+        <div class="nav-logo">CleanSwing<span style="color:var(--gold)">Golf</span></div>
         <p>Professional golf club restoration services. Bringing performance and beauty back to your game, one club at a time.</p>
         <div class="social-links">
           <a class="social-link" href="#" title="Instagram">📸</a>
@@ -1695,7 +1695,7 @@
           <div class="info-icon">📧</div>
           <div class="info-text">
             <h4>Email Us</h4>
-            <p><a href="mailto:hello@CleanSwingGolf.com">hello@CleanSwingGolf.com</a><br>We typically respond within 2–4 hours.</p>
+            <p><a href="/cdn-cgi/l/email-protection#442c2128282b04072821252a17332d2a23032b28226a272b29"><span class="__cf_email__" data-cfemail="b7dfd2dbdbd8f7f4dbd2d6d9e4c0ded9d0f0d8dbd199d4d8da">[email&#160;protected]</span></a><br>We typically respond within 2–4 hours.</p>
           </div>
         </div>
 
@@ -1748,7 +1748,7 @@
         <div class="footer-col">
           <h5>Contact</h5>
           <ul>
-            <li><a href="mailto:hello@CleanSwingGolf.com">hello@CleanSwingGolf.com</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#83ebe6efefecc3c0efe6e2edd0f4eaede4c4ecefe5ade0ecee"><span class="__cf_email__" data-cfemail="f49c9198989bb4b79891959aa7839d9a93b39b9892da979b99">[email&#160;protected]</span></a></li>
             <li><a>Stuarts Draft, Virginia</a></li>
             <li><a>Mon–Sun: 8AM–7PM</a></li>
           </ul>
@@ -1763,7 +1763,7 @@
 </div>
 
 <!-- ─── SCRIPTS ─── -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ── Page Navigation
   function showPage(name) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -1799,52 +1799,72 @@
   // ── Before/After Slider
   function initBA() {
     const container = document.getElementById('baContainer');
-    const cover = document.getElementById('baAfterCover');
-    const divider = document.getElementById('baDivider');
-    const handle = document.getElementById('baHandle');
+    const wrapper   = document.getElementById('baWrapper');
+    const cover     = document.getElementById('baAfterCover');
+    const afterInner = document.getElementById('baAfterInner');
+    const afterImg  = document.getElementById('baAfterImg');
+    const divider   = document.getElementById('baDivider');
+    const handle    = document.getElementById('baHandle');
     if (!container) return;
 
     let isDragging = false;
 
     function setPos(pct) {
-      pct = Math.max(5, Math.min(95, pct));
-      cover.style.left = pct + '%';
+      pct = Math.max(2, Math.min(98, pct));
+      const W = wrapper.offsetWidth;
+
+      // Cover clips from this % leftward → only shows right portion
+      cover.style.left  = pct + '%';
       divider.style.left = pct + '%';
-      handle.style.left = pct + '%';
+      handle.style.left  = pct + '%';
+
+      // The after image must be full-container-width, anchored to left edge
+      // Since it lives inside .ba-after-cover which starts at `pct`%,
+      // shift the image left by pct% of the full container width to realign it
+      const offsetPx = (pct / 100) * W;
+      afterInner.style.left  = (-offsetPx) + 'px';
+      afterInner.style.width = W + 'px';
+      afterImg.style.width   = W + 'px';
+      afterImg.style.height  = '100%';
     }
 
+    // Init at 50%
     setPos(50);
 
-    function getX(e) {
+    // Re-sync on resize
+    window.addEventListener('resize', () => setPos(
+      parseFloat(cover.style.left) || 50
+    ));
+
+    function getClientX(e) {
       return e.touches ? e.touches[0].clientX : e.clientX;
     }
 
-    handle.addEventListener('mousedown', () => isDragging = true);
+    handle.addEventListener('mousedown',  () => isDragging = true);
     handle.addEventListener('touchstart', () => isDragging = true, { passive: true });
 
-    document.addEventListener('mouseup', () => isDragging = false);
+    document.addEventListener('mouseup',  () => isDragging = false);
     document.addEventListener('touchend', () => isDragging = false);
 
     document.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
-      const rect = container.getBoundingClientRect();
-      const pct = ((getX(e) - rect.left) / rect.width) * 100;
+      const rect = wrapper.getBoundingClientRect();
+      const pct  = ((getClientX(e) - rect.left) / rect.width) * 100;
       setPos(pct);
     });
 
     document.addEventListener('touchmove', (e) => {
       if (!isDragging) return;
-      const rect = container.getBoundingClientRect();
-      const pct = ((getX(e) - rect.left) / rect.width) * 100;
+      const rect = wrapper.getBoundingClientRect();
+      const pct  = ((getClientX(e) - rect.left) / rect.width) * 100;
       setPos(pct);
     }, { passive: true });
 
-    container.addEventListener('click', (e) => {
-      if (!isDragging) {
-        const rect = container.getBoundingClientRect();
-        const pct = ((e.clientX - rect.left) / rect.width) * 100;
-        setPos(pct);
-      }
+    // Click anywhere on container to jump
+    wrapper.addEventListener('click', (e) => {
+      const rect = wrapper.getBoundingClientRect();
+      const pct  = ((e.clientX - rect.left) / rect.width) * 100;
+      setPos(pct);
     });
   }
 
@@ -1856,20 +1876,4 @@
       alert('Please fill in your name and email address.');
       return;
     }
-    document.getElementById('contactForm').style.display = 'none';
-    document.getElementById('formSuccess').classList.add('show');
-  }
-
-  // ── Init
-  document.addEventListener('DOMContentLoaded', () => {
-    initReveal();
-    initBA();
-    setTimeout(() => {
-      document.querySelectorAll('.page.active .reveal').forEach(el => {
-        el.classList.add('visible');
-      });
-    }, 400);
-  });
-</script>
-</body>
-</html>
+    document.getElementById('con
